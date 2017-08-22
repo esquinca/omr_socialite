@@ -108,8 +108,6 @@ class RegisterController extends Controller
 
     }
 
-
-
      /**
       * Obtain the user information from Facebook.
       *
@@ -139,16 +137,58 @@ class RegisterController extends Controller
                       ['name' => $socialUser->getName()]
                   );
 
+                  if (empty($socialUser->getId())) {
+                    $socialID = "";
+                  }else{
+                    $socialID = $socialUser->getId();
+                  }
+
+                  if (empty($socialUser->getAvatar())) {
+                    $socialAvatar = "";
+                  }else{
+                    $socialAvatar = $socialUser->getAvatar();
+                  }
+
+                  if (empty($socialUser->avatar_original)) {
+                    $socialAvatarOrig = "";
+                  }else{
+                    $socialAvatarOrig = $socialUser->avatar_original;
+                  }
+
+                  if (empty($socialUser->user['age_range']["min"])) {
+                    $socialEdad = "";
+                  }else{
+                    $socialEdad = $socialUser->user['age_range']["min"];
+                  }
+
+                  if (empty($socialUser->user['gender'])) {
+                    $socialGenero = "";
+                  }else{
+                    $socialGenero = $socialUser->user['gender'];
+                  }
+
+                  if (empty($socialUser->user['location']['name'])) {
+                    $socialLoc = "";
+                  }else{
+                    $socialLoc = $socialUser->user['location']['name'];
+                  }
+
+                  if (empty($socialLink = $socialUser->user['link'])) {
+                    $socialLink = "";
+                  }else{
+                    $socialLink = $socialUser->user['link'];
+                  }
+
                   $user->socialProviders()->create(
                       ['user_id' => $user->id,
-                       'provider_id' => $socialUser->getId(),
+                       'provider_id' => $socialID,
                        'provider' => $provider,
-                       'picturemin' => $socialUser->getAvatar(),
-                       'picturemax' => $socialUser->avatar_original,
-                       'age_range' => $socialUser->user['age_range']["min"],
-                       'gender'  => $socialUser->user['gender'],
-                       'location'  => $socialUser->user['location']['name'],
-                       'link'  => $socialUser->user['link']
+                       'picturemin' => $socialAvatar,
+                       'picturemax' => $socialAvatarOrig,
+                       'age_range' => $socialEdad,
+                       'gender'  => $socialGenero,
+                       'location'  => $socialLoc,
+                       'link'  => $socialLink
                      ]
                   );
 
@@ -156,7 +196,7 @@ class RegisterController extends Controller
               else
                  $user = $socialProvider->user;
                  auth()->login($user);
-                 return view('layouts.partials.submit');
+                 return view('submitx');
        }
        if ($provider == 'google') {
          try
@@ -190,7 +230,7 @@ class RegisterController extends Controller
          else
               $user = $socialProvider->user;
               auth()->login($user);
-              return view('layouts.partials.submit');
+              return view('submitx');
          //dd($socialUser);
        }
 
@@ -223,7 +263,7 @@ class RegisterController extends Controller
               $user = $socialProvider->user;
               auth()->login($user);
               //return redirect('/');
-             return view('layouts.partials.submit');
+             return view('submitx');
        }
 
 
@@ -257,5 +297,16 @@ class RegisterController extends Controller
          //      auth()->login($user);
          //      return redirect('/');
         //return view('layouts.partials.submit');
+     }
+     public function submit(Request $request)
+     {
+      $sip = $request->sip;
+      $mac = $request->mac;
+      $client_mac = $request->client_mac;
+      $uip = $request->uip;
+      $ssid = $request->ssid;
+      $vlan = $request->vlan;
+
+      echo "OK";
      }
 }
