@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Socialite; //Llamamos la api
 use Session;
+use DB;
 class RegisterController extends Controller
 {
     /*
@@ -300,12 +301,15 @@ class RegisterController extends Controller
      }
      public function submit(Request $request)
      {
+      $email = $request->email_addess;
       $sip = $request->sip;
       $mac = $request->mac;
       $client_mac = $request->client_mac;
       $uip = $request->uip;
       $ssid = $request->ssid;
       $vlan = $request->vlan;
+
+      $res = DB::table('email_h10omr')->insert(['email' = > $email]);
 
       echo "OK";
      }

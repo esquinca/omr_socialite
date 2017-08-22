@@ -34,8 +34,8 @@ $('#btnlogin').on('click', function(){
       data: objData,
       success: function (data) {
         //console.log('success:', data);
-        if (data === 'OK') {
-          console.log('OK');
+        if (data === '1') {
+          console.log(data);
           $('#loginform').submit();
         }
       },

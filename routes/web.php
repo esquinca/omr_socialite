@@ -20,6 +20,6 @@ Route::post('auth/dir', 'Auth\RegisterController@creandosession');
 Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
 
-Route::post('/submit_inputs', 'Auth\RegisterController@submit');
+Route::post('/submit_inputs', 'HomeController@store');
 
 Route::get('submitx', 'HomeController@create');
