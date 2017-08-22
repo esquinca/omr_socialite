@@ -21,16 +21,16 @@
           </div>
           <div class="information-hidden">
             {{ csrf_field() }}
-            <input class="form-control" type="hidden" id="username" name="username" value="GUESTOMR" />
-            <input class="form-control" type="hidden" id="password" name="password" value="123" />
-            <input class="form-control" type="hidden" id="sip" name="sip" value="{{ isset($_GET['sip']) ? $_GET['sip'] : '' }}" />
-            <input class="form-control" type="hidden" id="mac" name="mac" value="{{ isset($_GET['mac']) ? $_GET['mac'] : '' }}" />
-            <input class="form-control" type="hidden" id="client_mac" name="client_mac" value="{{ isset($_GET['client_mac']) ? $_GET['client_mac'] : '' }}" />
-            <input class="form-control" type="hidden" id="uip" name="uip" value="{{ isset($_GET['uip']) ? $_GET['uip'] : '' }}" />
-            <input class="form-control" type="hidden" id="ssid" name="ssid" value="{{ isset($_GET['ssid']) ? $_GET['ssid'] : '' }}" />
-            <input class="form-control" type="hidden" id="vlan" name="vlan" value="{{ isset($_GET['vlan']) ? $_GET['vlan'] : '' }}" />
-            <input class="form-control" type="hidden" id="res" name="res" value="{{ isset($_GET['res']) ? $_GET['res'] : '' }}" />
-            <input class="form-control" type="hidden" id="auth" name="auth" value="{{ isset($_GET['auth']) ? $_GET['auth'] : '' }}">
+            <input class="form-control" type="text" id="username" name="username" value="GUESTOMR" />
+            <input class="form-control" type="text" id="password" name="password" value="123" />
+            <input class="form-control" type="text" id="sip" name="sip" value="{{ isset($_GET['sip']) ? $_GET['sip'] : '172.200.0.2' }}" />
+            <input class="form-control" type="text" id="mac" name="mac" value="{{ isset($_GET['mac']) ? $_GET['mac'] : '38ff361d5110' }}" />
+            <input class="form-control" type="text" id="client_mac" name="client_mac" value="{{ isset($_GET['client_mac']) ? $_GET['client_mac'] : '3ca06729f541' }}" />
+            <input class="form-control" type="text" id="uip" name="uip" value="{{ isset($_GET['uip']) ? $_GET['uip'] : '172.200.5.184' }}" />
+            <input class="form-control" type="text" id="ssid" name="ssid" value="{{ isset($_GET['ssid']) ? $_GET['ssid'] : 'OMR-Demo' }}" />
+            <input class="form-control" type="text" id="vlan" name="vlan" value="{{ isset($_GET['vlan']) ? $_GET['vlan'] : '1' }}" />
+            <input class="form-control" type="text" id="res" name="res" value="{{ isset($_GET['res']) ? $_GET['res'] : '' }}" />
+            <input class="form-control" type="text" id="auth" name="auth" value="{{ isset($_GET['auth']) ? $_GET['auth'] : '' }}">
           </div>
         </div>
 

@@ -7,8 +7,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Socialite; //Llamamos la api
-
+use Session;
 class RegisterController extends Controller
 {
     /*
@@ -70,6 +71,20 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    public function creandosession(Request $request)
+    {
+      session(['username' => $request->username]);
+      session(['password' => $request->password]);
+      session(['sip' => $request->sip]);
+      session(['mac' => $request->mac]);
+      session(['client_mac' => $request->client_mac]);
+      session(['uip' => $request->uip]);
+      session(['ssid' => $request->ssid]);
+      session(['vlan' => $request->vlan]);
+      session(['res' => $request->res]);
+      session(['auth' => $request->auth]);
+      return 'OK';
+    }
     /**
     * Redirect the user to the Facebook authentication page.
     *
@@ -88,34 +103,55 @@ class RegisterController extends Controller
       */
      public function handleProviderCallback($provider)
      {
-         try
-         {
-             $socialUser = Socialite::driver($provider)->user();
-         }
-         catch(\Exception $e)
-         {
-             return redirect('/');
-         }
-         //check if we have logged provider
-         $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
-         if(!$socialProvider)
-         {
-             //create a new user and provider
-             $user = User::firstOrCreate(
-                 ['email' => $socialUser->getEmail()],
-                 ['name' => $socialUser->getName()]
-             );
-
-             $user->socialProviders()->create(
-                 ['user_id' => $user->id,
-                 'provider_id' => $socialUser->getId(),
-                  'provider' => $provider]
-             );
-
-         }
-         else
-              $user = $socialProvider->user;
-              auth()->login($user);
-              return redirect('/');
+       echo $form_username  = session('username');
+       echo '<br>';
+       echo $form_password  = session('password');
+       echo '<br>';
+       echo $form_sip  = session('sip');
+       echo '<br>';
+       echo $form_mac  = session('mac');
+       echo '<br>';
+       echo $form_client_mac = session('client_mac');
+       echo '<br>';
+       echo $form_uip  = session('uip');
+       echo '<br>';
+       echo $form_ssid  = session('ssid');
+       echo '<br>';
+       echo $form_vlan  = session('vlan');
+       echo '<br>';
+       echo $form_res  = session('res');
+       echo '<br>';
+       echo $form_auth  = session('auth');
+       echo '<br>';
+       echo 'Hola';
+        //  try
+        //  {
+        //      $socialUser = Socialite::driver($provider)->user();
+        //  }
+        //  catch(\Exception $e)
+        //  {
+        //      return redirect('/');
+        //  }
+        //  //check if we have logged provider
+        //  $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
+        //  if(!$socialProvider)
+        //  {
+        //      //create a new user and provider
+        //      $user = User::firstOrCreate(
+        //          ['email' => $socialUser->getEmail()],
+        //          ['name' => $socialUser->getName()]
+        //      );
+         //
+        //      $user->socialProviders()->create(
+        //          ['user_id' => $user->id,
+        //          'provider_id' => $socialUser->getId(),
+        //           'provider' => $provider]
+        //      );
+         //
+        //  }
+        //  else
+        //       $user = $socialProvider->user;
+        //       auth()->login($user);
+        //       return redirect('/');
      }
 }

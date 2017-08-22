@@ -1,3 +1,18 @@
+$(function() {
+  var objData = $("#loginform").find("select,textarea, input").serialize();
+  $.ajax({
+    type: "POST",
+    url: "auth/dir",
+    data: objData,
+    success: function (data) {
+      console.log('Success:', data);
+    },
+    error: function (data) {
+      console.log('Error:', data);
+    }
+  });
+});
+
 $('#btnlogin').on('click', function(){
   var xa = validarEmail('email_addess');
   var xb = validarcheck('checkbox-signup');
