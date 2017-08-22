@@ -16,7 +16,7 @@ $(function() {
 $('#btnlogin').on('click', function(){
   var xa = validarEmail('email_addess');
   var xb = validarcheck('checkbox-signup');
-  var xc= validarcaptcha('g-recaptcha-response');
+  //var xc= validarcaptcha('g-recaptcha-response');
   // $('#g-recaptcha-response').val();
 
   if (xa == false) {
@@ -25,11 +25,8 @@ $('#btnlogin').on('click', function(){
   if (xb == false) {
      toast_error_check();
   }
-  if (xc == false) {
-    toast_error_checkcaptchap();
-  }
 
-  if ( xa == true &&  xb == true && xc == true ) {
+  if ( xa == true &&  xb == true ) {
     var objData = $("#loginform").find("select,textarea, input").serialize();
     $.ajax({
       url: "/submit_inputs",
