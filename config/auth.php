@@ -68,6 +68,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+            'table' => 'user_contratos',
         ],
 
         // 'users' => [
@@ -94,7 +95,7 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
+            'table' => 'password_resets_h10omr',
             'expire' => 60,
         ],
     ],

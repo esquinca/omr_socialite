@@ -52,7 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users_h10omr',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -92,8 +92,23 @@ class RegisterController extends Controller
     public function redirectToProvider($provider)
     {
         //return Socialite::driver('facebook')->redirect();
-       return Socialite::driver($provider)->redirect();
+        if($provider == 'facebook') {
+          //return Socialite::driver($provider)->redirect();
+          return Socialite::driver($provider)
+                ->fields(['id', 'name','age_range' ,'link', 'email', 'picture', 'gender', 'birthday','location'])
+                ->scopes(['email', 'user_birthday','user_location'])
+                ->redirect();
+        }
+        if($provider == 'google') {
+          return Socialite::driver($provider)->redirect();
+        }
+        if($provider == 'twitter') {
+          return Socialite::driver($provider)->redirect();
+        }
+
     }
+
+
 
      /**
       * Obtain the user information from Facebook.
@@ -102,22 +117,116 @@ class RegisterController extends Controller
       */
      public function handleProviderCallback($provider)
      {
-       // echo $form_sip  = session('sip');
-       // echo '<br>';
-       // echo $form_mac  = session('mac');
-       // echo '<br>';
-       // echo $form_client_mac = session('client_mac');
-       // echo '<br>';
-       // echo $form_uip  = session('uip');
-       // echo '<br>';
-       // echo $form_ssid  = session('ssid');
-       // echo '<br>';
-       // echo $form_vlan  = session('vlan');
-       // echo '<br>';
-       // echo $form_res  = session('res');
-       // echo '<br>';
-       // echo $form_auth  = session('auth');
-       // echo '<br>';
+       if($provider == 'facebook') {
+            try
+            {
+                $socialUser = Socialite::driver($provider)
+                ->fields(['id', 'name', 'age_range', 'link', 'email', 'picture', 'gender', 'birthday', 'location'])
+                ->user();
+                //dd($socialUser);
+            }
+            catch(\Exception $e)
+            {
+                return redirect('/504');
+            }
+
+              $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
+              if(!$socialProvider)
+              {
+                  //create a new user and provider
+                  $user = User::firstOrCreate(
+                      ['email' => $socialUser->getEmail()],
+                      ['name' => $socialUser->getName()]
+                  );
+
+                  $user->socialProviders()->create(
+                      ['user_id' => $user->id,
+                       'provider_id' => $socialUser->getId(),
+                       'provider' => $provider,
+                       'picturemin' => $socialUser->getAvatar(),
+                       'picturemax' => $socialUser->avatar_original,
+                       'age_range' => $socialUser->user['age_range']["min"],
+                       'gender'  => $socialUser->user['gender'],
+                       'location'  => $socialUser->user['location']['name'],
+                       'link'  => $socialUser->user['link']
+                     ]
+                  );
+
+              }
+              else
+                 $user = $socialProvider->user;
+                 auth()->login($user);
+                 return view('layouts.partials.submit');
+       }
+       if ($provider == 'google') {
+         try
+         {
+             $socialUser = Socialite::driver($provider)->user();
+         }
+         catch(\Exception $e)
+         {
+             return redirect('/504');
+         }
+
+         $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
+         if(!$socialProvider)
+         {
+           //create a new user and provider
+            $user = User::firstOrCreate(
+                ['email' => $socialUser->email],
+                ['name' => $socialUser->name]
+            );
+
+            $user->socialProviders()->create(
+                ['user_id' => $user->id,
+                'provider_id' => $socialUser->id,
+                'provider' => $provider,
+                'picturemin' => $socialUser->avatar,
+                'picturemax' => $socialUser->avatar_original,
+                'link'  => $socialUser->user['url']]
+            );
+
+         }
+         else
+              $user = $socialProvider->user;
+              auth()->login($user);
+              return view('layouts.partials.submit');
+         //dd($socialUser);
+       }
+
+       if ($provider == 'twitter') {
+         try
+         {
+             $socialUser = Socialite::driver($provider)->user();
+             //dd($socialUser);
+         }
+         catch(\Exception $e)
+         {
+             return redirect('/');
+         }
+         if(!$socialProvider)
+         {
+             //create a new user and provider
+             $user = User::firstOrCreate(
+                 ['email' => $socialUser->getEmail()],
+                 ['name' => $socialUser->getName()]
+             );
+
+             $user->socialProviders()->create(
+                 ['user_id' => $user->id,
+                 'provider_id' => $socialUser->getId(),
+                  'provider' => $provider]
+             );
+
+         }
+         else
+              $user = $socialProvider->user;
+              auth()->login($user);
+              //return redirect('/');
+             return view('layouts.partials.submit');
+       }
+
+
          // try
          // {
          //     $socialUser = Socialite::driver($provider)->user();
@@ -135,18 +244,18 @@ class RegisterController extends Controller
          //         ['email' => $socialUser->getEmail()],
          //         ['name' => $socialUser->getName()]
          //     );
-         
+
          //     $user->socialProviders()->create(
          //         ['user_id' => $user->id,
          //         'provider_id' => $socialUser->getId(),
          //          'provider' => $provider]
          //     );
-         
+
          // }
          // else
          //      $user = $socialProvider->user;
          //      auth()->login($user);
          //      return redirect('/');
-        return view('layouts.partials.submit');
+        //return view('layouts.partials.submit');
      }
 }

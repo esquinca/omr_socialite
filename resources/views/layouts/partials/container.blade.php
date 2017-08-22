@@ -61,9 +61,9 @@
           <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
             <div class="social">
               <!--{{ url('/auth/twitter') }}-->
-              <a href="javascript:void(0)" class="btn btn-twitter" data-toggle="tooltip"  title="Login with twitter">
+              <!-- <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter" data-toggle="tooltip"  title="Login with twitter">
                 <i aria-hidden="true" class="fa fa-twitter-square"></i>
-              </a>
+              </a> -->
               <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook" data-toggle="tooltip"  title="Login with Facebook">
                 <i aria-hidden="true" class="fa fa-facebook-official"></i>
               </a>

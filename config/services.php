@@ -44,5 +44,10 @@ return [
        'client_secret'     =>  '882e08356a7ab29eb3668beeaf7e4958',
        'redirect'          =>  'http://localhost:8000/auth/facebook/callback',
    ],
+   'twitter' => [ //change it to any provider
+       'client_id' => 'pW509hmmknmTsnN3Oys9DWWn7',
+       'client_secret' => 'rJfMiGzeURP1dhrAXPzOSRfphjerk5SL7UreYaresJkABS2RRD',
+       'redirect' => 'http://localhost:8000/auth/twitter/callback',
+    ],
 
 ];

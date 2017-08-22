@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SocialProvider extends Model
 {
-  protected $fillable = ['provider_id','provider'];
+  protected $table = 'social_providers_h10omr';
+
+  protected $fillable = ['user_id', 'provider_id', 'provider', 'picturemin', 'picturemax', 'age_range', 'gender', 'location', 'link'];
 
   public function user()
   {
