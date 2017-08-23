@@ -23,3 +23,5 @@ Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCa
 Route::post('/submit_inputs', 'HomeController@store');
 
 Route::get('submitx', 'HomeController@create');
+
+Route::get('pagenotfound', ['as' => 'notfound', 'uses' => 'HomeController@pagenotfound']);

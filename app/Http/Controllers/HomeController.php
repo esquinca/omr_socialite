@@ -63,6 +63,11 @@ class HomeController extends Controller
       return "OK";
     }
 
+    public function pagenotfound()
+    {
+        return view('errors.pagenotfound');
+    }
+
     /**
      * Display the specified resource.
      *
