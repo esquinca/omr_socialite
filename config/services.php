@@ -36,13 +36,13 @@ return [
     ],
     'google' => [
         'client_id' => '420447498805-4obhhg2ob5rcn3s1nujiddo59vq5j756.apps.googleusercontent.com',
-        'client_secret' => 'sfEaRXmFzP7rl8nO5C19zjte',
-        'redirect' => 'http://sitwifi:8004/auth/google/callback',
+        'client_secret' => '0mcFBYiW0NDmN-l2AIMncdcL',
+        'redirect' => 'http://sitwifi.com:8004/auth/google/callback',
     ],
     'facebook' => [
        'client_id'         =>  '112091552794910',
        'client_secret'     =>  '882e08356a7ab29eb3668beeaf7e4958',
-       'redirect'          =>  'http://172.200.0.6:8004/auth/facebook/callback',
+       'redirect'          =>  'http://sitwifi.com:8004/auth/facebook/callback',
    ],
    'twitter' => [ //change it to any provider
        'client_id' => 'pW509hmmknmTsnN3Oys9DWWn7',

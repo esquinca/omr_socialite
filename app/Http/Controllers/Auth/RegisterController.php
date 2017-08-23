@@ -93,17 +93,17 @@ class RegisterController extends Controller
     public function redirectToProvider($provider)
     {
         //return Socialite::driver('facebook')->redirect();
-        if($provider == 'facebook') {
+        if($provider === 'facebook') {
           //return Socialite::driver($provider)->redirect();
           return Socialite::driver($provider)
                 ->fields(['id', 'name','age_range' ,'link', 'email', 'picture', 'gender', 'birthday','location'])
                 ->scopes(['email', 'user_birthday','user_location'])
                 ->redirect();
         }
-        if($provider == 'google') {
+        if($provider === 'google') {
           return Socialite::driver($provider)->redirect();
         }
-        if($provider == 'twitter') {
+        if($provider === 'twitter') {
           return Socialite::driver($provider)->redirect();
         }
 
@@ -116,7 +116,7 @@ class RegisterController extends Controller
       */
      public function handleProviderCallback($provider)
      {
-       if($provider == 'facebook') {
+       if($provider === 'facebook') {
             try
             {
                 $socialUser = Socialite::driver($provider)
@@ -199,43 +199,43 @@ class RegisterController extends Controller
                  auth()->login($user);
                  return view('submitx');
        }
-       if ($provider == 'google') {
-         try
-         {
+       if ($provider === 'google') {
+           try
+           {
              $socialUser = Socialite::driver($provider)->user();
-         }
-         catch(\Exception $e)
-         {
-             return redirect('/504');
-         }
+             //dd($socialUser);
+           }
+           catch(\Exception $e)
+           {
+               return redirect('/504');
+           }
 
-         $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
-         if(!$socialProvider)
-         {
-           //create a new user and provider
-            $user = User::firstOrCreate(
-                ['email' => $socialUser->email],
-                ['name' => $socialUser->name]
-            );
+           $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
+           if(!$socialProvider)
+           {
+             //create a new user and provider
+              $user = User::firstOrCreate(
+                  ['email' => $socialUser->email],
+                  ['name' => $socialUser->name]
+              );
 
-            $user->socialProviders()->create(
-                ['user_id' => $user->id,
-                'provider_id' => $socialUser->id,
-                'provider' => $provider,
-                'picturemin' => $socialUser->avatar,
-                'picturemax' => $socialUser->avatar_original,
-                'link'  => $socialUser->user['url']]
-            );
-
-         }
-         else
-              $user = $socialProvider->user;
-              auth()->login($user);
-              return view('submitx');
+              $user->socialProviders()->create(
+                  ['user_id' => $user->id,
+                  'provider_id' => $socialUser->id,
+                  'provider' => $provider,
+                  'picturemin' => $socialUser->avatar,
+                  'picturemax' => $socialUser->avatar_original,
+                  'link'  => $socialUser->user['url']]
+              );
+           }
+           else
+                $user = $socialProvider->user;
+                auth()->login($user);
+                return view('submitx');
          //dd($socialUser);
        }
 
-       if ($provider == 'twitter') {
+       if ($provider === 'twitter') {
          try
          {
              $socialUser = Socialite::driver($provider)->user();
@@ -268,49 +268,19 @@ class RegisterController extends Controller
        }
 
 
-         // try
-         // {
-         //     $socialUser = Socialite::driver($provider)->user();
-         // }
-         // catch(\Exception $e)
-         // {
-         //     return redirect('/');
-         // }
-         // //check if we have logged provider
-         // $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
-         // if(!$socialProvider)
-         // {
-         //     //create a new user and provider
-         //     $user = User::firstOrCreate(
-         //         ['email' => $socialUser->getEmail()],
-         //         ['name' => $socialUser->getName()]
-         //     );
-
-         //     $user->socialProviders()->create(
-         //         ['user_id' => $user->id,
-         //         'provider_id' => $socialUser->getId(),
-         //          'provider' => $provider]
-         //     );
-
-         // }
-         // else
-         //      $user = $socialProvider->user;
-         //      auth()->login($user);
-         //      return redirect('/');
-        //return view('layouts.partials.submit');
      }
      public function submit(Request $request)
      {
-      $email = $request->email_addess;
-      $sip = $request->sip;
-      $mac = $request->mac;
-      $client_mac = $request->client_mac;
-      $uip = $request->uip;
-      $ssid = $request->ssid;
-      $vlan = $request->vlan;
-
-      $res = DB::table('email_h10omr')->insert(['email' = > $email]);
-
-      echo "OK";
+      // $email = $request->email_addess;
+      // $sip = $request->sip;
+      // $mac = $request->mac;
+      // $client_mac = $request->client_mac;
+      // $uip = $request->uip;
+      // $ssid = $request->ssid;
+      // $vlan = $request->vlan;
+      //
+      // $res = DB::table('email_h10omr')->insert(['email' = > $email]);
+      //
+      // echo "OK";
      }
 }
