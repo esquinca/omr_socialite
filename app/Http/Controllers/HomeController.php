@@ -58,7 +58,7 @@ class HomeController extends Controller
       // $ssid = $request->ssid;
       // $vlan = $request->vlan;
 
-      $res = DB::table('email_h10omr')->insert(['email' => $email]);
+      $res = DB::table('email_h10omr')->insert(['email' => $email, 'created_at' => date('Y-m-d H:i:s')]);
 
       return "OK";
     }
