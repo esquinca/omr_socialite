@@ -40,7 +40,7 @@ class HomeController extends Controller
       $res = DB::table('email_h10omr')->insert(['email' => $email]);
 
       return redirect('submitx');
-     }    
+     }
 
     /**
      * Store a newly created resource in storage.
@@ -50,18 +50,17 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        echo "OK";
       $email = $request->email_addess;
-      $sip = $request->sip;
-      $mac = $request->mac;
-      $client_mac = $request->client_mac;
-      $uip = $request->uip;
-      $ssid = $request->ssid;
-      $vlan = $request->vlan;
+      // $sip = $request->sip;
+      // $mac = $request->mac;
+      // $client_mac = $request->client_mac;
+      // $uip = $request->uip;
+      // $ssid = $request->ssid;
+      // $vlan = $request->vlan;
 
       $res = DB::table('email_h10omr')->insert(['email' => $email]);
 
-      echo "OK";
+      return "OK";
     }
 
     /**

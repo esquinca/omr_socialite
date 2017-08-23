@@ -29,20 +29,18 @@ $('#btnlogin').on('click', function(){
   if ( xa == true &&  xb == true ) {
     var objData = $("#loginform").find("select,textarea, input").serialize();
     $.ajax({
-      url: "/submit_inputs",
-      type: "POST",
-      data: objData,
-      success: function (data) {
-        //console.log('success:', data);
-        if (data === '1') {
-          console.log(data);
-          $('#loginform').submit();
-        }
-      },
-      error: function (data) {
-        console.log('Error:', data);
-      }
-    });
+         url: "/submit_inputs",
+         type: "POST",
+         data: objData,
+         success: function (data) {
+           if (data === 'OK') {
+             $('#loginform').submit();
+           }
+         },
+         error: function (data) {
+           console.log('Error:', data);
+         }
+     });
   }
 
 
