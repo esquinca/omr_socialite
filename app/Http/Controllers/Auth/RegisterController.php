@@ -132,12 +132,6 @@ class RegisterController extends Controller
               $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
               if(!$socialProvider)
               {
-                  //create a new user and provider
-                  $user = User::firstOrCreate(
-                      ['email' => $socialUser->getEmail()],
-                      ['name' => $socialUser->getName()]
-                  );
-
                   if (empty($socialUser->getId())) {
                     $socialID = "";
                   }else{
@@ -168,19 +162,54 @@ class RegisterController extends Controller
                     $socialGenero = $socialUser->user['gender'];
                   }
 
+                  if (empty($socialUser->user['birthday'])) {
+                    $socialCumple = "";
+                  }else{
+                    $socialCumple = $socialUser->user['birthday'];
+                  }
+
                   if (empty($socialUser->user['location']['name'])) {
                     $socialLoc = "";
                   }else{
                     $socialLoc = $socialUser->user['location']['name'];
                   }
 
-                  if (empty($socialLink = $socialUser->user['link'])) {
+                  if (empty($socialUser->user['link'])) {
                     $socialLink = "";
                   }else{
                     $socialLink = $socialUser->user['link'];
                   }
 
-                  $user->socialProviders()->create(
+                  if (empty($socialUser->getName())) {
+                    $socialName = '';
+                  }else{
+                    $socialName = $socialUser->getName();
+                  }
+
+                  if (empty($socialUser->getEmail())) {
+                    $socialEmail = "";
+                    DB::table('provide_public_h10omr')->insert(
+                      ['provider_id' => $socialID,
+                       'provider' => $provider,
+                       'name' => $socialName,
+                       'picturemin' => $socialAvatar,
+                       'picturemax' => $socialAvatarOrig,
+                       'age_range' => $socialEdad,
+                       'gender'  => $socialGenero,
+                       'birthday' => $socialCumple,
+                       'location'  => $socialLoc,
+                       'link'  => $socialLink
+                       'created_at' => date('Y-m-d H:i:s')]
+                    );
+                    return view('submitx');
+                  }else{
+                    $socialEmail = $socialUser->getEmail();
+                    //create a new user and provider
+                    $user = User::firstOrCreate(
+                        ['email' => $socialEmail],
+                        ['name' => $socialName]
+                    );
+                    $user->socialProviders()->create(
                       ['user_id' => $user->id,
                        'provider_id' => $socialID,
                        'provider' => $provider,
@@ -188,10 +217,16 @@ class RegisterController extends Controller
                        'picturemax' => $socialAvatarOrig,
                        'age_range' => $socialEdad,
                        'gender'  => $socialGenero,
+                       'birthday' => $socialCumple,
                        'location'  => $socialLoc,
                        'link'  => $socialLink
                      ]
                   );
+                  }
+
+
+
+
 
               }
               else
@@ -213,19 +248,50 @@ class RegisterController extends Controller
            $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
            if(!$socialProvider)
            {
+
+              if (empty($socialUser->name)) {
+                $socialName = "";
+              }else{
+                $socialName = $socialUser->name;
+              }
+
+              if (empty($socialUser->id)) {
+                $socialID = "";
+              }else{
+                $socialID = $socialUser->id;
+              }
+
+              if (empty($socialUser->avatar)) {
+                $socialAvatar = "";
+              }else{
+                $socialAvatar = $socialUser->avatar;
+              }
+
+              if (empty($socialUser->avatar_original)) {
+                $socialAvatarOrig = "";
+              }else{
+                $socialAvatarOrig = $socialUser->avatar_original;
+              }                              
+
+              if (empty($socialUser->user['url'])) {
+                $socialLink = "";
+              }else{
+                $socialLink = $socialUser->user['url'];
+              }    
+
              //create a new user and provider
               $user = User::firstOrCreate(
                   ['email' => $socialUser->email],
-                  ['name' => $socialUser->name]
+                  ['name' => $socialName]
               );
 
               $user->socialProviders()->create(
                   ['user_id' => $user->id,
-                  'provider_id' => $socialUser->id,
+                  'provider_id' => $socialID,
                   'provider' => $provider,
-                  'picturemin' => $socialUser->avatar,
-                  'picturemax' => $socialUser->avatar_original,
-                  'link'  => $socialUser->user['url']]
+                  'picturemin' => $socialAvatar,
+                  'picturemax' => $socialAvatarOrig,
+                  'link'  => $socialLink]
               );
            }
            else

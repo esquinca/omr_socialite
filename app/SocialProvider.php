@@ -8,7 +8,7 @@ class SocialProvider extends Model
 {
   protected $table = 'social_providers_h10omr';
 
-  protected $fillable = ['user_id', 'provider_id', 'provider', 'picturemin', 'picturemax', 'age_range', 'gender', 'location', 'link'];
+  protected $fillable = ['user_id', 'provider_id', 'provider', 'picturemin', 'picturemax', 'age_range', 'gender', 'birthday', 'location', 'link'];
 
   public function user()
   {
