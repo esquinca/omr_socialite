@@ -58,17 +58,22 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+          <div class="col-xs-6 col-sm-6 col-md-6 m-t-10 text-center">
             <div class="social">
               <!--{{ url('/auth/twitter') }}-->
               <!-- <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter" data-toggle="tooltip"  title="Login with twitter">
                 <i aria-hidden="true" class="fa fa-twitter-square"></i>
               </a> -->
-              <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook" data-toggle="tooltip"  title="Login with Facebook">
-                <i aria-hidden="true" class="fa fa-facebook-official"></i>
+
+              <a href="{{ url('/auth/facebook') }}" class="btn btn-block btn-facebook" data-toggle="tooltip"  title="Login with Facebook">
+                <i aria-hidden="true" class="fa fa-facebook-official"> Facebook</i>
               </a>
-              <a href="{{ url('/auth/google') }}" class="btn btn-googleplus" data-toggle="tooltip"  title="Login with Google">
-                <i aria-hidden="true" class="fa fa-google-plus-official"></i>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 m-t-10 text-center">
+            <div class="social">
+              <a href="{{ url('/auth/google') }}" class="btn btn-block btn-googleplus" data-toggle="tooltip"  title="Login with Google">
+                <i aria-hidden="true" class="fa fa-google-plus-official"> Google</i>
               </a>
             </div>
           </div>
@@ -77,8 +82,10 @@
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             <p>{{ trans('login.change_language') }}
-              <a href="{{ url('lang/es') }}" class="text-dark m-l-5"><img src="./images/flags/es.png" class="img-circle" alt="User Image"><b> {{ trans('login.lang_one') }}</b></a>
-              <a href="{{ url('lang/en') }}" class="text-dark m-l-5"><img src="./images/flags/en.png" class="img-circle" alt="User Image"><b> {{ trans('login.lang_two') }}</b></a>
+              <!-- <a href="{{ url('lang/es') }}" class="text-dark m-l-5"><img src="./images/flags/es.png" class="img-circle" alt="User Image"><b> {{ trans('login.lang_one') }}</b></a>
+              <a href="{{ url('lang/en') }}" class="text-dark m-l-5"><img src="./images/flags/en.png" class="img-circle" alt="User Image"><b> {{ trans('login.lang_two') }}</b></a> -->
+              <a href="{{ url('lang/es') }}" class="text-dark m-l-5"><b> ES ({{ trans('login.lang_one') }})</b></a>
+              <a href="{{ url('lang/en') }}" class="text-dark m-l-5"><b> EN ({{ trans('login.lang_two') }})</b></a>
             </p>
           </div>
         </div>
@@ -114,7 +121,10 @@
                                   </li>
                                 </ul>
                               </li>
-                              <li>{{ trans('termsofuse.paragraph_four') }}</li>
+                              <li>
+                                {{ trans('termsofuse.paragraph_four') }}
+                                <a href="{{ url('policies') }}" target="_blank">{{ trans('termsofuse.more') }}</a>
+                              </li>
                             </ul>
                           </div>
                           <div class="modal-footer">

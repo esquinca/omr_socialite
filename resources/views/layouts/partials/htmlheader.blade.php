@@ -11,7 +11,7 @@
       <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
       <!-- faIonicons -->
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('/plugins/fa-Ionicons/font-awesome-4.7.0/css/font-awesome.css') }}" rel="stylesheet" type="text/css" />
       <!-- Bootstrap Core CSS -->
       <link href="{{ asset('/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
       <!-- Bootstrap Social CSS -->

@@ -30,9 +30,6 @@ label {
   display: block;
   margin-bottom: 30px
 }
-.login-box .social a i {
-  font-size: 14px;
-}
 .white-box .box-title {
   margin: 0 0 1px;
   font-weight: 500;
@@ -58,16 +55,7 @@ h2 p.inline{
 .center-align{
   text-align: center;
 }
-.login-box-two{
-  /*background: #fff;*/
-  border-radius: 25px;
-  margin: 1% auto 0
-}
-.white-box-two{
-  padding: 25px;
-  background-color: rgb(195, 218, 237); /* Fallback for web browsers that don't support RGBa */
-  background-color: rgba(195, 218, 237, 0.9); /* RGBa with 0.6 opacity */
-}
+
 /* Maquetado movil...........................................................*/
 @media (min-width:320px)  {
 /* smartphones, iPhone, portrait 480x320 phones */
@@ -76,7 +64,7 @@ h2 p.inline{
       /*background: #fff;*/
       background-color: rgb(195, 218, 237); /* Fallback for web browsers that don't support RGBa */
       background-color: rgba(195, 218, 237, 0.5); /* RGBa with 0.6 opacity */
-      width: 360px;
+      width: 400px;
       margin: 1% auto 0
   }
   .white-box {
@@ -92,7 +80,7 @@ h2 p.inline{
       /*background: #fff;*/
       background-color: rgb(195, 218, 237); /* Fallback for web browsers that don't support RGBa */
       background-color: rgba(195, 218, 237, 0.5); /* RGBa with 0.6 opacity */
-      width: 360px;
+      width: 400px;
       margin: 1% auto 0
   }
   .white-box {

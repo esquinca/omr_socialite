@@ -20,4 +20,5 @@ return [
     'paragraph_three' => '(*) Se proporciona la red inalámbrica "tal cual" sin garantías de ningún tipo, ya sea expresa o implícita.',
     'paragraph_four' => 'Esta red inalámbrica está activada por Ruckus Wireless.',
     'close_modal' => 'Cerrar',
+    'more' => 'Saber mas',
 ];

@@ -25,3 +25,5 @@ Route::post('/submit_inputs', 'HomeController@store');
 Route::get('submitx', 'HomeController@create');
 
 Route::get('pagenotfound', ['as' => 'notfound', 'uses' => 'HomeController@pagenotfound']);
+
+Route::get('policies', 'HomeController@indexpolicies');

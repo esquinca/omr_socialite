@@ -21,4 +21,5 @@ return [
     'paragraph_three' => '(*) The wireless network is provided "as is" without warranties of any kind, either express or implied.',
     'paragraph_four' => 'This wireless network is enabled by Ruckus Wireless.',
     'close_modal' => 'Close',
+    'more' => 'Do want to know more.',
 ];
