@@ -188,7 +188,7 @@ class RegisterController extends Controller
 
                   if (empty($socialUser->getEmail())) {
                     $socialEmail = "";
-                    DB::table('provide_public_h10omr')->insert(
+                    DB::table('profile_public_h10omr')->insert(
                       ['provider_id' => $socialID,
                        'provider' => $provider,
                        'name' => $socialName,
